@@ -1,11 +1,10 @@
-(async () => {
-  let changeColor = document.getElementById('changeColor');
-
-  changeColor.onclick = function () {
+const playButtons = document.querySelectorAll('.play');
+playButtons.forEach((element) => {
+  element.addEventListener('click', () => {
     chrome.tabs.query({ url: 'https://meet.google.com/*' }, (tabs) => {
       tabs.forEach((tab) => {
-        chrome.tabs.sendMessage(tab.id, { type: 'alert' });
+        chrome.tabs.sendMessage(tab.id, { type: element.dataset.type });
       });
     });
-  };
-})();
+  });
+});

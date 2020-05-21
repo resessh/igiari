@@ -2,15 +2,37 @@
 <html>
   <head>
     <style>
+      body {
+        width: 460px;
+        height: 124px;
+      }
       button {
-        height: 30px;
-        width: 30px;
         outline: none;
+        padding: 10px;
+        border: 1px solid #999;
+        border-radius: 4px;
+        background-color: white;
+        cursor: pointer;
+        transition: filter 200ms ease-out;
+      }
+      button:hover {
+        filter: grayscale(0.4);
+      }
+      button img {
+        height: 100px;
       }
     </style>
   </head>
   <body>
-    <button id="changeColor"></button>
-    <script src="popup.js"></script>
+    <button class="play" data-type="alert">
+      <img src="images/button_alert.png" alt="">
+    </button>
+    <button class="play" data-type="igiari">
+      <img src="images/button_igiari.png" alt="">
+    </button>
+    <button class="play" data-type="matta">
+      <img src="images/button_matta.png" alt="">
+    </button>
+    <script defer src="popup.js"></script>
   </body>
 </html>

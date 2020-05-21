@@ -12,22 +12,24 @@
   ],
   "web_accessible_resources": [
     "contentscript.js",
-    "sounds/metalgear-alert.wav"
+    "sounds/metalgear-alert.wav",
+    "sounds/igiari.wav",
+    "sounds/matta.wav"
   ],
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "images/get_started16.png",
-      "32": "images/get_started32.png",
-      "48": "images/get_started48.png",
-      "128": "images/get_started128.png"
+      "16": "images/igiari_icon16.png",
+      "32": "images/igiari_icon32.png",
+      "48": "images/igiari_icon48.png",
+      "128": "images/igiari_icon128.png"
     }
   },
   "icons": {
-    "16": "images/get_started16.png",
-    "32": "images/get_started32.png",
-    "48": "images/get_started48.png",
-    "128": "images/get_started128.png"
+    "16": "images/igiari_icon16.png",
+    "32": "images/igiari_icon32.png",
+    "48": "images/igiari_icon48.png",
+    "128": "images/igiari_icon128.png"
   },
   "manifest_version": 2
 }

@@ -1,5 +1,9 @@
 // constant
-const sounds = [{ type: 'alert', path: 'sounds/metalgear-alert.wav' }];
+const sounds = [
+  { type: 'alert', path: 'sounds/metalgear-alert.wav' },
+  { type: 'igiari', path: 'sounds/igiari.wav' },
+  { type: 'matta', path: 'sounds/matta.wav' },
+];
 
 window.addEventListener(
   'load',
