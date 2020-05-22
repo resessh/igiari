@@ -17,26 +17,44 @@
     );
     source.connect(audioOutput);
     soundElements[type].currentTime = 0;
+    soundElements[type].addEventListener(
+      'ended',
+      () => {
+        source.disconnect(audioOutput);
+      },
+      false,
+    );
     soundElements[type].play();
   });
+
+  let destructLatestStream;
 
   // getUserMediaを差し替える
   if (navigator.mediaDevices._getUserMedia !== undefined) return;
   navigator.mediaDevices._getUserMedia = navigator.mediaDevices.getUserMedia;
   navigator.mediaDevices.getUserMedia = async (constraints) => {
+    // 前回addしたtrackを外す
+    destructLatestStream && destructLatestStream();
     console.log('constraints', constraints); // eslint-disable-line
     const stream = await navigator.mediaDevices._getUserMedia(constraints);
     console.log('stream', stream); // eslint-disable-line
     const isDesktopAudio =
-      constraints?.video?.mandatory?.chromeMediaSource === 'system';
+      constraints?.audio?.mandatory?.chromeMediaSource === 'system';
 
     if (constraints.audio && !isDesktopAudio) {
       const audioTracks = stream.getAudioTracks();
       const micSource = audioContext.createMediaStreamSource(stream);
       micSource.connect(audioOutput);
       if (audioTracks.length) {
-        stream.removeTrack(audioTracks[0]);
-        stream.addTrack(audioOutput.stream.getAudioTracks()[0]);
+        const defaultAudioTrack = audioTracks[0];
+        stream.removeTrack(defaultAudioTrack);
+        const otherDestinationTrack = audioOutput.stream.getAudioTracks()[0];
+        stream.addTrack(otherDestinationTrack);
+
+        destructLatestStream = () => {
+          stream.removeTrack(otherDestinationTrack);
+          stream.addTrack(defaultAudioTrack);
+        };
       }
     }
     return stream;
